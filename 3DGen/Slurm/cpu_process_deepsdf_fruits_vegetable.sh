@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# List of fruits (without the .txt extension)
+fruits=(
+    "apples" "apricots" "bananas" "blackberries" "blueberries" "cantaloupes" "cherries" "clementines"
+    "coconuts" "cranberries" "custard_apples" "dates" "dragon_fruits" "durian" "figs" "gooseberries"
+    "grapefruits" "grapes" "guavas" "honeydew_melons" "jackfruits" "kiwifruits" "kumquats" "lemons"
+    "limes" "lychees" "mangoes" "mandarins" "mangosteens" "mulberries" "nectarines" "oranges" "papayas"
+    "passion_fruits" "peaches" "pears" "persimmons" "pineapples" "plums" "pomegranates" "quince" "rambutans"
+    "raspberries" "soursop" "star_fruits" "strawberries" "tamarinds" "tangelos" "watermelons"
+)
+
+# List of vegetables (without the .txt extension)
+vegetables=(
+    "acorn_squash" "alfalfa_sprouts" "artichokes" "arugula" "asparagus" "bamboo_shoots" "beets" "bell_peppers"
+    "bok_choy" "broccoli" "brussels_sprouts" "butternut_squash" "cabbage" "carrots" "cauliflower" "celery"
+    "collard_greens" "corn" "cucumbers" "eggplants" "endive" "fennel" "garlic" "green_beans" "habanero_peppers"
+    "jalapeño_peppers" "kale" "leeks" "lettuce" "mushrooms" "mustard_greens" "okra" "onions" "parsnips"
+    "peas" "potatoes" "pumpkin" "radishes" "rutabagas" "scallions" "shallots" "spinach" "spaghetti_squash"
+    "sweet_potatoes" "swiss_chard" "tomatoes" "turnips" "watercress" "yams" "zucchini"
+)
+
+# Loop over fruits and submit sbatch commands
+for fruit in "${fruits[@]}"; do
+    #sbatch cpu_process_deepsdf.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Fruits_data/" czefzec \
+    #    "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "60" "train" "${fruit}_meshes_train"
+    #sbatch cpu_process_deepsdf.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Fruits_data/" czefzec \
+    #    "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "61" "val" "${fruit}_meshes_val"
+
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Part_fruits/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "54" "train" "${fruit}_meshes_train"
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Part_fruits/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "55" "val" "${fruit}_meshes_val"
+
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Mini_Fruits/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "56" "train" "${fruit}_meshes_train"
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Mini_Fruits/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "57" "val" "${fruit}_meshes_val"
+done
+
+# Loop over vegetables and submit sbatch commands
+for vegetable in "${vegetables[@]}"; do
+    #sbatch cpu_process_deepsdf.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Vegetables_data/" czefzec \
+    #    "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "62" "train" "${vegetable}_meshes_train"
+    #sbatch cpu_process_deepsdf.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Vegetables_data/" czefzec \
+    #    "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "63" "val" "${vegetable}_meshes_val"
+
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Part_vegetables/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "52" "train" "${vegetable}_meshes_train"
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Part_vegetables/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "53" "val" "${vegetable}_meshes_val"
+
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Mini_Vegetables/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "58" "train" "${vegetable}_meshes_train"
+    sbatch cpu_process_deepsdf_cat.slurm "/lustre/fsn1/projects/rech/tya/ubn15wo/3D_GEN/Mini_Vegetables/" czefzec \
+        "/lustre/fswork/projects/rech/tya/ubn15wo/3D_gen/3DMeshes_Generation/Slurm/script_deepsdf/" "59" "val" "${vegetable}_meshes_val"
+done
+
